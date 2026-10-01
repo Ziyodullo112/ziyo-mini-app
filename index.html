@@ -1,1 +1,216 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ZIYO</title>
 
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+background:linear-gradient(160deg,#07111f,#101b31);
+color:#fff;
+font-family:Arial,sans-serif;
+min-height:100vh
+}
+
+.app{
+max-width:520px;
+margin:auto;
+padding:24px 16px 90px
+}
+
+.logo{
+text-align:center;
+color:#ffd84d;
+font-size:34px;
+font-weight:800;
+letter-spacing:3px;
+margin:8px 0 24px
+}
+
+.card{
+background:#ffffff10;
+border:1px solid #ffffff18;
+border-radius:22px;
+padding:22px;
+margin-bottom:14px
+}
+
+.label{
+color:#aab5c8;
+font-size:14px
+}
+
+.balance{
+font-size:38px;
+font-weight:800;
+margin:8px 0 18px
+}
+
+.coin{
+color:#ffd84d;
+font-size:15px
+}
+
+.claim{
+width:100%;
+border:0;
+border-radius:16px;
+padding:16px;
+background:linear-gradient(90deg,#ffd84d,#ffb52e);
+color:#111;
+font-size:18px;
+font-weight:800
+}
+
+.claim:disabled{
+opacity:.5
+}
+
+.status{
+text-align:center;
+color:#aab5c8;
+font-size:13px;
+min-height:20px;
+margin-top:10px
+}
+
+.stats{
+display:flex;
+gap:10px
+}
+
+.stat{
+flex:1;
+background:#ffffff0d;
+border-radius:16px;
+padding:15px
+}
+
+.stat b{
+display:block;
+font-size:20px;
+margin-top:6px
+}
+
+.progress{
+height:8px;
+background:#243149;
+border-radius:10px;
+overflow:hidden;
+margin-top:10px
+}
+
+.progress i{
+display:block;
+height:100%;
+width:0;
+background:#ffd84d
+}
+
+.nav{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+background:#070d18f5;
+border-top:1px solid #ffffff14;
+display:flex;
+justify-content:center;
+gap:6px;
+padding:10px 5px calc(10px + env(safe-area-inset-bottom))
+}
+
+.nav button{
+background:none;
+border:0;
+color:#9eabc0;
+font-size:12px;
+padding:7px
+}
+
+.nav button:first-child{
+color:#ffd84d
+}
+
+.small{
+text-align:center;
+color:#8794a9;
+font-size:12px;
+margin-top:12px
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="logo">ZIYO</div>
+
+<div class="card">
+
+<div class="label">Твой баланс</div>
+
+<div class="balance">
+<span id="balance">—</span>
+<span class="coin">ZIYO</span>
+</div>
+
+<button class="claim" id="claim" disabled>
+Загрузка...
+</button>
+
+<div class="status" id="status">
+Подключение...
+</div>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<div class="label">Уровень</div>
+<b id="level">1</b>
+</div>
+
+<div class="stat">
+<div class="label">До следующего</div>
+<b id="next">1000</b>
+</div>
+
+</div>
+
+<div class="card" style="margin-top:14px">
+
+<div class="label">
+Прогресс уровня
+</div>
+
+<div class="progress">
+<i id="progress"></i>
+</div>
+
+</div>
+
+<div class="small">
+Баланс хранится на сервере и привязан к твоему Telegram.
+</div>
+
+</div>
+
+<div class="nav">
+
+<button>🏠<br>Главная</button>
+<button>🎯<br>Задания</button>
+<button>👥<br>Друзья</button>
+<button>🏆<br>Рейтинг</button>
+<button>💰<br>Кошелёк
+  </script>
+</body>
+</html>
