@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ZIYO</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -11,138 +11,166 @@
 *{box-sizing:border-box}
 
 body{
-margin:0;
-background:linear-gradient(160deg,#07111f,#101b31);
-color:#fff;
-font-family:Arial,sans-serif;
-min-height:100vh
+  margin:0;
+  background:linear-gradient(160deg,#07111f,#0b1930);
+  color:#fff;
+  font-family:Arial,sans-serif;
+  min-height:100vh;
 }
 
 .app{
-max-width:520px;
-margin:auto;
-padding:24px 16px 90px
+  max-width:480px;
+  margin:auto;
+  min-height:100vh;
+  padding-bottom:90px;
+}
+
+header{
+  text-align:center;
+  padding:55px 20px 25px;
 }
 
 .logo{
-text-align:center;
-color:#ffd84d;
-font-size:34px;
-font-weight:800;
-letter-spacing:3px;
-margin:8px 0 24px
+  font-size:48px;
+  font-weight:bold;
+  color:#ffd83d;
+  letter-spacing:2px;
+}
+
+.sub{
+  color:#8e9bb2;
+  margin-top:8px;
 }
 
 .card{
-background:#ffffff10;
-border:1px solid #ffffff18;
-border-radius:22px;
-padding:22px;
-margin-bottom:14px
+  margin:14px 16px;
+  padding:22px;
+  border:1px solid #263852;
+  border-radius:28px;
+  background:rgba(30,43,63,.85);
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
 }
 
 .label{
-color:#aab5c8;
-font-size:14px
+  color:#aab5c7;
+  font-size:17px;
 }
 
 .balance{
-font-size:38px;
-font-weight:800;
-margin:8px 0 18px
+  font-size:42px;
+  font-weight:bold;
+  margin:14px 0 22px;
 }
 
 .coin{
-color:#ffd84d;
-font-size:15px
+  color:#ffd83d;
+  font-size:20px;
 }
 
 .claim{
-width:100%;
-border:0;
-border-radius:16px;
-padding:16px;
-background:linear-gradient(90deg,#ffd84d,#ffb52e);
-color:#111;
-font-size:18px;
-font-weight:800
+  width:100%;
+  border:0;
+  border-radius:22px;
+  padding:18px;
+  background:#d6b333;
+  color:#07111f;
+  font-size:20px;
+  font-weight:bold;
 }
 
 .claim:disabled{
-opacity:.5
+  opacity:.55;
 }
 
 .status{
-text-align:center;
-color:#aab5c8;
-font-size:13px;
-min-height:20px;
-margin-top:10px
+  text-align:center;
+  color:#8e9bb2;
+  margin-top:15px;
 }
 
 .stats{
-display:flex;
-gap:10px
+  display:flex;
+  gap:14px;
+  margin:14px 16px;
 }
 
 .stat{
-flex:1;
-background:#ffffff0d;
-border-radius:16px;
-padding:15px
+  flex:1;
+  padding:20px;
+  border-radius:24px;
+  background:#17243a;
 }
 
-.stat b{
-display:block;
-font-size:20px;
-margin-top:6px
+.stat-title{
+  color:#9caac0;
+  font-size:16px;
+}
+
+.stat-value{
+  font-size:30px;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+.progress-bg{
+  height:14px;
+  background:#263852;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:15px;
 }
 
 .progress{
-height:8px;
-background:#243149;
-border-radius:10px;
-overflow:hidden;
-margin-top:10px
+  height:100%;
+  width:0%;
+  background:#ffd83d;
+  border-radius:20px;
+  transition:.3s;
 }
 
-.progress i{
-display:block;
-height:100%;
-width:0;
-background:#ffd84d
+.info{
+  text-align:center;
+  color:#7f8ca2;
+  padding:10px 25px;
+  line-height:1.4;
 }
 
-.nav{
-position:fixed;
-left:0;
-right:0;
-bottom:0;
-background:#070d18f5;
-border-top:1px solid #ffffff14;
-display:flex;
-justify-content:center;
-gap:6px;
-padding:10px 5px calc(10px + env(safe-area-inset-bottom))
+nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:480px;
+  height:82px;
+  background:#070e1b;
+  border-top:1px solid #1c2a40;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
 }
 
-.nav button{
-background:none;
-border:0;
-color:#9eabc0;
-font-size:12px;
-padding:7px
+.nav-item{
+  text-align:center;
+  color:#8e9bb2;
+  font-size:13px;
 }
 
-.nav button:first-child{
-color:#ffd84d
+.nav-item span{
+  display:block;
+  font-size:25px;
+  margin-bottom:4px;
 }
 
-.small{
-text-align:center;
-color:#8794a9;
-font-size:12px;
-margin-top:12px
+.nav-active{
+  color:#ffd83d;
+}
+
+.error{
+  color:#ff7777;
+  text-align:center;
+  padding:15px;
+  display:none;
 }
 </style>
 </head>
@@ -151,66 +179,267 @@ margin-top:12px
 
 <div class="app">
 
-<div class="logo">ZIYO</div>
+<header>
+  <div class="logo">ZIYO</div>
+  <div class="sub">Telegram Mini App</div>
+</header>
 
 <div class="card">
 
-<div class="label">Твой баланс</div>
+  <div class="label">Твой баланс</div>
 
-<div class="balance">
-<span id="balance">—</span>
-<span class="coin">ZIYO</span>
-</div>
+  <div class="balance">
+    <span id="balance">—</span>
+    <span class="coin">ZIYO</span>
+  </div>
 
-<button class="claim" id="claim" disabled>
-Загрузка...
-</button>
+  <button id="claim" class="claim" disabled>
+    Загрузка...
+  </button>
 
-<div class="status" id="status">
-Подключение...
-</div>
+  <div id="status" class="status">
+    Подключение...
+  </div>
 
 </div>
 
 <div class="stats">
 
-<div class="stat">
-<div class="label">Уровень</div>
-<b id="level">1</b>
-</div>
+  <div class="stat">
+    <div class="stat-title">Уровень</div>
+    <div id="level" class="stat-value">1</div>
+  </div>
 
-<div class="stat">
-<div class="label">До следующего</div>
-<b id="next">1000</b>
-</div>
-
-</div>
-
-<div class="card" style="margin-top:14px">
-
-<div class="label">
-Прогресс уровня
-</div>
-
-<div class="progress">
-<i id="progress"></i>
-</div>
+  <div class="stat">
+    <div class="stat-title">До следующего</div>
+    <div id="next" class="stat-value">1000</div>
+  </div>
 
 </div>
 
-<div class="small">
-Баланс хранится на сервере и привязан к твоему Telegram.
-</div>
+<div class="card">
+
+  <div class="label">Прогресс уровня</div>
+
+  <div class="progress-bg">
+    <div id="progress" class="progress"></div>
+  </div>
 
 </div>
 
-<div class="nav">
+<div id="error" class="error"></div>
 
-<button>🏠<br>Главная</button>
-<button>🎯<br>Задания</button>
-<button>👥<br>Друзья</button>
-<button>🏆<br>Рейтинг</button>
-<button>💰<br>Кошелёк
-  </script>
+<div class="info">
+  Баланс хранится на сервере и привязан к твоему Telegram.
+</div>
+
+<nav>
+
+  <div class="nav-item nav-active">
+    <span>🏠</span>
+    Главная
+  </div>
+
+  <div class="nav-item">
+    <span>🎯</span>
+    Задания
+  </div>
+
+  <div class="nav-item">
+    <span>👥</span>
+    Друзья
+  </div>
+
+  <div class="nav-item">
+    <span>🏆</span>
+    Рейтинг
+  </div>
+
+  <div class="nav-item">
+    <span>💰</span>
+    Кошелёк
+  </div>
+
+</nav>
+
+</div>
+
+<script>
+
+const tg = window.Telegram.WebApp;
+
+tg.ready();
+tg.expand();
+
+const API = "https://ziyo-api.ziedullosaripov8.workers.dev";
+
+const balanceEl = document.getElementById("balance");
+const claimBtn = document.getElementById("claim");
+const statusEl = document.getElementById("status");
+const errorEl = document.getElementById("error");
+const levelEl = document.getElementById("level");
+const nextEl = document.getElementById("next");
+const progressEl = document.getElementById("progress");
+
+function headers(){
+  return {
+    "X-Telegram-Init-Data": tg.initData
+  };
+}
+
+function showError(message){
+  errorEl.style.display = "block";
+  errorEl.textContent = message;
+}
+
+function hideError(){
+  errorEl.style.display = "none";
+}
+
+function updateLevel(balance){
+
+  const level = Math.floor(balance / 1000) + 1;
+
+  const currentLevelStart = (level - 1) * 1000;
+  const nextLevel = level * 1000;
+
+  const progress =
+    ((balance - currentLevelStart) / 1000) * 100;
+
+  levelEl.textContent = level;
+
+  nextEl.textContent =
+    Math.max(0, nextLevel - balance).toLocaleString();
+
+  progressEl.style.width =
+    Math.min(100, Math.max(0, progress)) + "%";
+}
+
+function setBalance(balance){
+
+  balanceEl.textContent =
+    Number(balance).toLocaleString();
+
+  updateLevel(Number(balance));
+}
+
+async function loadUser(){
+
+  hideError();
+
+  if(!tg.initData){
+    showError("Открой ZIYO внутри Telegram.");
+    statusEl.textContent = "Нет данных Telegram";
+    claimBtn.disabled = true;
+    return;
+  }
+
+  try{
+
+    statusEl.textContent = "Загрузка...";
+
+    const response = await fetch(
+      API + "/api/me",
+      {
+        method:"GET",
+        headers:headers()
+      }
+    );
+
+    const data = await response.json();
+
+    if(!response.ok || !data.ok){
+      throw new Error(data.error || "Ошибка API");
+    }
+
+    setBalance(data.user.balance);
+
+    statusEl.textContent =
+      "Аккаунт подключён ✓";
+
+    claimBtn.disabled = false;
+    claimBtn.textContent = "🎁 Получить +50 ZIYO";
+
+  }catch(error){
+
+    console.error(error);
+
+    showError(
+      "Не удалось подключиться к серверу."
+    );
+
+    statusEl.textContent =
+      "Ошибка подключения";
+
+    claimBtn.disabled = true;
+  }
+}
+
+async function claim(){
+
+  hideError();
+
+  claimBtn.disabled = true;
+  claimBtn.textContent = "Загрузка...";
+
+  try{
+
+    const response = await fetch(
+      API + "/api/claim",
+      {
+        method:"POST",
+        headers:{
+          ...headers(),
+          "Content-Type":"application/json"
+        },
+        body:"{}"
+      }
+    );
+
+    const data = await response.json();
+
+    if(!response.ok || !data.ok){
+      throw new Error(
+        data.error || "Не удалось получить награду"
+      );
+    }
+
+    setBalance(data.balance);
+
+    statusEl.textContent =
+      "🎉 Получено +" + data.reward + " ZIYO";
+
+    claimBtn.textContent =
+      "Получено ✓";
+
+    setTimeout(function(){
+
+      claimBtn.disabled = false;
+      claimBtn.textContent =
+        "🎁 Получить +50 ZIYO";
+
+    },3000);
+
+  }catch(error){
+
+    console.error(error);
+
+    showError(error.message);
+
+    claimBtn.disabled = false;
+    claimBtn.textContent =
+      "🎁 Получить +50 ZIYO";
+  }
+}
+
+claimBtn.addEventListener(
+  "click",
+  claim
+);
+
+loadUser();
+
+</script>
+
 </body>
 </html>
